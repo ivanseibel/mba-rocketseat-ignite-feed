@@ -1,9 +1,9 @@
 import { Header } from "./components/Header"
 import { Post } from "./components/Post"
+import { Sidebar } from "./components/Sidebar"
 
 import './global.css'
 import styles from './App.module.css'
-import { Sidebar } from "./components/Sidebar"
 
 function App() {
   return (
@@ -14,18 +14,8 @@ function App() {
         <Sidebar />
 
         <main>
-          <Post 
-            author="Ivan Seibel"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nunc nec nunc."
-          />
-          <Post 
-            author="Ivan Seibel"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nunc nec nunc."
-          />
-          <Post 
-            author="Ivan Seibel"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nunc nec nunc."
-          />
+          <Post />
+          <Post />
         </main>
       </div>
     </div>
