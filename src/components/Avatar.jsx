@@ -21,7 +21,3 @@ Avatar.propTypes = {
   alt: PropTypes.string.isRequired,
   hasBorder: PropTypes.bool,
 }
-
-Avatar.defaultProps = {
-  hasBorder: false,
-}
