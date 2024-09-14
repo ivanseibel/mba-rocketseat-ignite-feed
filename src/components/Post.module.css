@@ -80,11 +80,6 @@
   border-top: 1px solid var(--gray-600);
 }
 
-.commentForm:focus-within > footer {
-  visibility: visible;
-  max-height: none;
-}
-
 .commentForm > strong {
   line-height: 1.6;
   color: var(--gray-100);
@@ -101,6 +96,11 @@
   color: var(--gray-100);
   line-height: 1.4;
   margin-top: 1rem;
+}
+
+.commentForm textarea:focus-within + footer {
+  visibility: visible;
+  max-height: none;
 }
 
 .commentForm > footer {
@@ -122,8 +122,13 @@
   transition: background-color 0.1s;
 }
 
-.commentForm button[type=submit]:hover {
+.commentForm button[type=submit]:not(disabled)hover {
   background-color: var(--green-300);
+}
+
+.commentForm button[type=submit]:disabled {
+  background-color: var(--gray-700);
+  cursor: not-allowed;
 }
 
 .commentList {
