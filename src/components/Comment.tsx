@@ -5,10 +5,15 @@ import { Avatar } from './Avatar'
 
 import styles from './Comment.module.css'
 
-export function Comment({ content, onDeleteComment }) {
+type CommentProps = {
+  content: string
+  onDeleteComment: () => void
+}
+
+export function Comment({ content, onDeleteComment }: CommentProps) {
   const [applauses, setApplauses] = React.useState(0)
 
-  function handleApplaud() {
+  function handleApplaud(event: React.MouseEvent) {
     event.preventDefault()
     setApplauses(applauses + 1)
   }

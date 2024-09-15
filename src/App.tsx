@@ -1,5 +1,5 @@
 import { Header } from "./components/Header"
-import { Post } from "./components/Post"
+import { Content, Post } from "./components/Post"
 import { Sidebar } from "./components/Sidebar"
 
 import './global.css'
@@ -23,7 +23,7 @@ const posts = [
         {type: 'link', content: 'github.com/ivanseibel/blogx', url: '#' },
         {type: 'paragraph', content: ' '},
         {type: 'tags', content: ['#reactjs', '#nextjs', '#webdevelopment']},
-      ]
+      ] as Content[]
     },
   },
   {
@@ -41,7 +41,7 @@ const posts = [
         {type: 'paragraph', content: 'Now I\'m going to work on the blog posts page.'},
         {type: 'paragraph', content: 'Stay tuned!'},
         {type: 'tags', content: ['#reactjs', '#nextjs', '#webdevelopment']},
-      ]
+      ] as Content[]
     },
   },
 ];
@@ -56,7 +56,10 @@ function App() {
 
         <main>
           {posts.map((post) => (
-            <Post key={post.id} {...post} />
+            <Post key={post.id}  
+              author={post.author}
+              post={post.post}
+            />
           ))}
         </main>
       </div>

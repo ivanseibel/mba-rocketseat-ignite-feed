@@ -6,26 +6,54 @@ import { Comment } from './Comment';
 
 import styles from './Post.module.css';
 
-export function Post(props) {
-  const [comments, setComments] = React.useState([]);
+interface Author {
+  avatar_url: string;
+  name: string;
+  role: string;
+}
+
+export interface Content {
+  type: 'paragraph' | 'text' | 'link' | 'tags';
+  content: string | string[];
+  url?: string;
+}
+
+interface Post {
+  publishedAt: Date;
+  content: Content[];
+}
+
+interface PostItem {
+  id: number;
+  author: Author;
+  post: Post;
+}
+
+interface PostProps {
+  author: Author;
+  post: Post;
+}
+
+export function Post({author, post}: PostProps) {
+  const [comments, setComments] = React.useState(Array<string>);
   const [comment, setComment] = React.useState('');
 
-  const { avatar_url, name, role } = props.author;
-  const { publishedAt, content } = props.post;
+  const { avatar_url, name, role } = author;
+  const { publishedAt, content } = post;
 
   const dateTitle = format(publishedAt, 'd MMM yyyy, HH:mm');
   const distanceToNow = formatDistanceToNow(publishedAt, { addSuffix: true });
 
-  function handleCommentSubmit(event) {
+  function handleCommentSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+  
     setComments([...comments, comment]);
     setComment('');
-
-    event.target.reset();
+  
+    (event.target as HTMLFormElement).reset();
   }
 
-  function handleDeleteComment(index) {
+  function handleDeleteComment(index: number) {
     const newComments = [...comments];
     newComments.splice(index, 1);
 
@@ -67,13 +95,13 @@ export function Post(props) {
           <React.Fragment key={index}>
             {item.type === 'paragraph' && (
               <p>
-                {item.content}
+                {item.content as string}
               </p>
             )}
 
             {item.type === 'text' && (
               <span>
-                {item.content}
+                {item.content as string}
               </span>
             )}
 
@@ -87,7 +115,7 @@ export function Post(props) {
               </a>
             )}
 
-            {item.type === 'tags' && (
+            {item.type === 'tags' && Array.isArray(item.content) && (
               item.content.map((tag, index) => (
                 <a 
                   key={index}
@@ -114,7 +142,6 @@ export function Post(props) {
           value={comment}
           onChange={(event) => setComment(event.target.value)}
           required
-          onInvalid={(event) => event.target.setCustomValidity('Please, leave a comment.')}
         ></textarea>
         
         <footer>
