@@ -126,12 +126,12 @@ export function Post(props) {
           </button>
         </footer>
 
-        <div className={styles.commentList}>
-          {comments.map((comment, index) => (
-            <Comment key={index} content={comment} onDeleteComment={() => handleDeleteComment(index)} />
-          ))}
-        </div>
       </form>
+      <div className={styles.commentList}>
+        {comments.map((comment, index) => (
+          <Comment key={index} content={comment} onDeleteComment={() => handleDeleteComment(index)} />
+        ))}
+      </div>
     </article>
   )
 }
